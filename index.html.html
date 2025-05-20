@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fama Barber Shop and Beauty Salon</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#1e3a8a',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=Professional%20barber%20shop%20interior%20with%20elegant%20wooden%20furniture%2C%20classic%20barber%20chairs%2C%20vintage%20mirrors%2C%20warm%20lighting%2C%20clean%20and%20organized%20space%2C%20high-end%20styling%20products%20displayed%2C%20subtle%20luxury%20atmosphere%2C%20no%20people%20visible%2C%20perfect%20for%20a%20high-end%20barber%20shop%20landing%20page&width=1920&height=1080&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .gallery-img-1 {
+            background-image: url('https://readdy.ai/api/search-image?query=Professional%20barber%20giving%20a%20stylish%20haircut%20to%20a%20male%20client%2C%20modern%20barbershop%20interior%2C%20warm%20lighting%2C%20focus%20on%20the%20haircut%20process%2C%20professional%20equipment%20visible%2C%20clean%20and%20elegant%20environment%2C%20high-quality%20service%20representation&width=600&height=400&seq=2&orientation=landscape');
+        }
+        .gallery-img-2 {
+            background-image: url('https://readdy.ai/api/search-image?query=Close-up%20of%20beard%20trimming%20and%20grooming%2C%20barber%20using%20professional%20tools%2C%20detailed%20view%20of%20precise%20beard%20styling%2C%20elegant%20barbershop%20setting%2C%20warm%20lighting%20highlighting%20the%20beard%20care%20process%2C%20premium%20grooming%20experience&width=600&height=400&seq=3&orientation=landscape');
+        }
+        .gallery-img-3 {
+            background-image: url('https://readdy.ai/api/search-image?query=Professional%20hair%20styling%20for%20a%20female%20client%20in%20a%20beauty%20salon%2C%20stylist%20using%20blow%20dryer%20and%20brush%2C%20elegant%20salon%20interior%2C%20warm%20lighting%2C%20focus%20on%20the%20styling%20process%2C%20premium%20service%20experience&width=600&height=400&seq=4&orientation=landscape');
+        }
+        .gallery-img-4 {
+            background-image: url('https://readdy.ai/api/search-image?query=Luxurious%20barbershop%20reception%20area%20with%20elegant%20wooden%20counter%2C%20stylish%20waiting%20area%20with%20comfortable%20seating%2C%20professional%20product%20display%2C%20warm%20lighting%2C%20sophisticated%20design%20elements%2C%20inviting%20atmosphere&width=600&height=400&seq=5&orientation=landscape');
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .custom-checkbox {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 4px;
+        }
+        .custom-checkbox:hover input ~ .checkmark {
+            border-color: #1e3a8a;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #1e3a8a;
+            border-color: #1e3a8a;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-checkbox .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #1e3a8a;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Sticky Book Now Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="bg-primary text-white px-6 py-3 font-semibold shadow-lg hover:bg-opacity-90 transition duration-300 flex items-center space-x-2 !rounded-button">
+            <div class="w-5 h-5 flex items-center justify-center">
+                <i class="ri-calendar-line"></i>
+            </div>
+            <span class="whitespace-nowrap">Book Now</span>
+        </button>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="fixed bottom-6 left-6 z-50">
+        <a href="#" class="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 flex items-center justify-center w-12 h-12">
+            <div class="w-6 h-6 flex items-center justify-center">
+                <i class="ri-whatsapp-line ri-lg"></i>
+            </div>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-['Pacifico'] text-primary">Fama</a>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#services" class="font-medium text-gray-700 hover:text-primary transition">Services</a>
+                <a href="#about" class="font-medium text-gray-700 hover:text-primary transition">About</a>
+                <a href="#gallery" class="font-medium text-gray-700 hover:text-primary transition">Gallery</a>
+                <a href="#contact" class="font-medium text-gray-700 hover:text-primary transition">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#book" class="hidden md:block bg-primary text-white px-5 py-2 font-medium !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">Book Appointment</a>
+                <button class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700" id="mobile-menu-button">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-menu-line ri-lg"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white absolute w-full shadow-md" id="mobile-menu">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#services" class="font-medium text-gray-700 hover:text-primary transition py-2">Services</a>
+                <a href="#about" class="font-medium text-gray-700 hover:text-primary transition py-2">About</a>
+                <a href="#gallery" class="font-medium text-gray-700 hover:text-primary transition py-2">Gallery</a>
+                <a href="#contact" class="font-medium text-gray-700 hover:text-primary transition py-2">Contact</a>
+                <a href="#book" class="bg-primary text-white px-5 py-2 font-medium !rounded-button hover:bg-opacity-90 transition duration-300 text-center whitespace-nowrap">Book Appointment</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Premium Barber Shop & Beauty Salon</h1>
+                <p class="text-xl text-white mb-8">Experience the art of grooming at Fama Barber Shop and Beauty Salon. Where style meets precision.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#book" class="bg-primary text-white px-8 py-4 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 text-center whitespace-nowrap">Book Appointment</a>
+                    <a href="#services" class="bg-white text-primary px-8 py-4 font-semibold !rounded-button hover:bg-gray-100 transition duration-300 text-center whitespace-nowrap">View Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Info Section -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="bg-white shadow-lg !rounded-xl p-6 md:p-8 -mt-16 relative z-20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">Fama Barber Shop and Beauty Salon</h2>
+                                <div class="flex items-center mt-2">
+                                    <div class="flex text-yellow-500">
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                        <div class="w-5 h-5 flex items-center justify-center">
+                                            <i class="ri-star-half-fill"></i>
+                                        </div>
+                                    </div>
+                                    <span class="ml-2 text-gray-700">4.6 (116+ reviews)</span>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center px-3 py-1 !rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                    <i class="ri-time-line"></i>
+                                </div>
+                                Open · Closes 7 pm
+                            </span>
+                        </div>
+                        
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-start">
+                                <div class="w-5 h-5 flex items-center justify-center mt-1 text-primary">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                                <p class="ml-3">500 N Bell Ave #109, Denton, TX 76209, United States</p>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                                <a href="tel:+19406129127" class="ml-3 hover:text-primary transition">+1 940-612-9127</a>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-scissors-line"></i>
+                                </div>
+                                <p class="ml-3">Barber Shop & Beauty Salon</p>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions Bar -->
+                        <div class="flex flex-wrap gap-3 mt-6">
+                            <a href="tel:+19406129127" class="flex items-center px-4 py-2 bg-gray-100 !rounded-button hover:bg-gray-200 transition whitespace-nowrap">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                                Call
+                            </a>
+                            <a href="https://maps.google.com" target="_blank" class="flex items-center px-4 py-2 bg-gray-100 !rounded-button hover:bg-gray-200 transition whitespace-nowrap">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-direction-line"></i>
+                                </div>
+                                Directions
+                            </a>
+                            <a href="#book" class="flex items-center px-4 py-2 bg-gray-100 !rounded-button hover:bg-gray-200 transition whitespace-nowrap">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-calendar-line"></i>
+                                </div>
+                                Book Now
+                            </a>
+                            <button class="flex items-center px-4 py-2 bg-gray-100 !rounded-button hover:bg-gray-200 transition whitespace-nowrap">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-share-line"></i>
+                                </div>
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="h-64 md:h-full relative overflow-hidden !rounded-lg">
+                        <div style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png')" class="absolute inset-0 bg-center bg-cover"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <a href="https://maps.google.com" target="_blank" class="bg-white px-4 py-2 !rounded-button shadow-md hover:bg-gray-100 transition whitespace-nowrap">
+                                Get Directions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Experience premium grooming services tailored to your unique style. Our expert barbers and stylists are dedicated to delivering excellence.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-scissors-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Haircut</h3>
+                    <p class="text-gray-600 mb-4">Precision cuts tailored to your style and face shape.</p>
+                    <p class="text-primary font-semibold">From $25</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-scissors-2-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Beard Trim</h3>
+                    <p class="text-gray-600 mb-4">Expert beard shaping and grooming services.</p>
+                    <p class="text-primary font-semibold">From $15</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-brush-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hair Styling</h3>
+                    <p class="text-gray-600 mb-4">Professional styling for any occasion or event.</p>
+                    <p class="text-primary font-semibold">From $35</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-paint-brush-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hair Coloring</h3>
+                    <p class="text-gray-600 mb-4">Premium coloring services with quality products.</p>
+                    <p class="text-primary font-semibold">From $60</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-face-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Facial</h3>
+                    <p class="text-gray-600 mb-4">Rejuvenating facial treatments for healthy skin.</p>
+                    <p class="text-primary font-semibold">From $45</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-shaver-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hot Shave</h3>
+                    <p class="text-gray-600 mb-4">Classic hot towel shave with premium products.</p>
+                    <p class="text-primary font-semibold">From $30</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-user-smile-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Kids Haircut</h3>
+                    <p class="text-gray-600 mb-4">Gentle and fun haircuts for the little ones.</p>
+                    <p class="text-primary font-semibold">From $20</p>
+                </div>
+                
+                <div class="service-card bg-white shadow-md !rounded-xl p-6 text-center transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-gift-line ri-lg"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">VIP Package</h3>
+                    <p class="text-gray-600 mb-4">Complete grooming experience with premium service.</p>
+                    <p class="text-primary font-semibold">From $85</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-block bg-primary text-white px-6 py-3 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">About Fama Barber Shop</h2>
+                    <p class="text-gray-700 mb-6">Founded in 2015, Fama Barber Shop and Beauty Salon has been providing premium grooming services to the Denton community. Our team of skilled barbers and stylists are dedicated to delivering exceptional service in a comfortable and welcoming environment.</p>
+                    <p class="text-gray-700 mb-6">We combine traditional barbering techniques with modern styles to create looks that are both timeless and contemporary. Our commitment to quality extends to every aspect of our service, from the products we use to the experience we provide.</p>
+                    <div class="grid grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">7+</div>
+                            <p class="text-gray-600">Years of Experience</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">5000+</div>
+                            <p class="text-gray-600">Happy Clients</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">8</div>
+                            <p class="text-gray-600">Expert Stylists</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">12+</div>
+                            <p class="text-gray-600">Award Winning</p>
+                        </div>
+                    </div>
+                    <a href="#book" class="inline-block bg-primary text-white px-6 py-3 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">Book an Appointment</a>
+                </div>
+                <div class="relative h-96 md:h-auto">
+                    <div class="absolute w-full h-full bg-primary bg-opacity-10 !rounded-xl -right-4 -bottom-4"></div>
+                    <img src="https://readdy.ai/api/search-image?query=Professional%20barber%20shop%20team%2C%20diverse%20group%20of%20skilled%20barbers%20and%20stylists%20standing%20together%20in%20an%20elegant%20barbershop%20interior%2C%20warm%20lighting%2C%20professional%20equipment%20visible%2C%20friendly%20and%20welcoming%20atmosphere%2C%20showcasing%20expertise%20and%20teamwork&width=600&height=700&seq=6&orientation=portrait" alt="Barber Shop Team" class="relative z-10 w-full h-full object-cover !rounded-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Don't just take our word for it. Here's what our clients have to say about their experience at Fama Barber Shop.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white shadow-md !rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 !rounded-full flex items-center justify-center mr-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-500">
+                                <i class="ri-user-line"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Michael Rodriguez</h4>
+                            <div class="flex text-yellow-500">
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"I've been coming to Fama for over a year now, and I've never had a bad haircut. James always knows exactly what I want, even when I don't know how to explain it. Highly recommend!"</p>
+                    <p class="text-gray-500 text-sm mt-4">May 15, 2025</p>
+                </div>
+                
+                <div class="bg-white shadow-md !rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 !rounded-full flex items-center justify-center mr-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-500">
+                                <i class="ri-user-line"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Emily Thompson</h4>
+                            <div class="flex text-yellow-500">
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The stylists at Fama are true professionals. I got a color and cut that exceeded my expectations. The salon is clean and everyone is friendly. A bit pricey but worth every penny for the quality."</p>
+                    <p class="text-gray-500 text-sm mt-4">April 28, 2025</p>
+                </div>
+                
+                <div class="bg-white shadow-md !rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 !rounded-full flex items-center justify-center mr-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-500">
+                                <i class="ri-user-line"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">David Washington</h4>
+                            <div class="flex text-yellow-500">
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The hot towel shave at Fama is an experience every man should try. Carlos takes his time and the result is incredible. The attention to detail and the relaxing atmosphere make it worth the visit."</p>
+                    <p class="text-gray-500 text-sm mt-4">May 5, 2025</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-block bg-white border border-primary text-primary px-6 py-3 font-semibold !rounded-button hover:bg-primary hover:text-white transition duration-300 whitespace-nowrap">Write a Review</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Gallery</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Take a look at our work and the atmosphere at Fama Barber Shop and Beauty Salon.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="gallery-img-1 h-64 bg-cover bg-center !rounded-xl shadow-md hover:shadow-lg transition duration-300"></div>
+                <div class="gallery-img-2 h-64 bg-cover bg-center !rounded-xl shadow-md hover:shadow-lg transition duration-300"></div>
+                <div class="gallery-img-3 h-64 bg-cover bg-center !rounded-xl shadow-md hover:shadow-lg transition duration-300"></div>
+                <div class="gallery-img-4 h-64 bg-cover bg-center !rounded-xl shadow-md hover:shadow-lg transition duration-300"></div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#" class="inline-block bg-white border border-primary text-primary px-6 py-3 font-semibold !rounded-button hover:bg-primary hover:text-white transition duration-300 whitespace-nowrap">View More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="book" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Book an Appointment</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Schedule your visit to Fama Barber Shop and Beauty Salon. We look forward to serving you.</p>
+                </div>
+                
+                <div class="bg-white shadow-md !rounded-xl p-6 md:p-8">
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your full name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your email">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your phone number">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-gray-700 font-medium mb-2">Service</label>
+                                <div class="relative">
+                                    <select id="service" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+                                        <option value="">Select a service</option>
+                                        <option value="haircut">Haircut</option>
+                                        <option value="beard-trim">Beard Trim</option>
+                                        <option value="hair-styling">Hair Styling</option>
+                                        <option value="hair-coloring">Hair Coloring</option>
+                                        <option value="facial">Facial</option>
+                                        <option value="hot-shave">Hot Shave</option>
+                                        <option value="kids-haircut">Kids Haircut</option>
+                                        <option value="vip-package">VIP Package</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="date" class="block text-gray-700 font-medium mb-2">Preferred Date</label>
+                                <input type="date" id="date" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="time" class="block text-gray-700 font-medium mb-2">Preferred Time</label>
+                                <div class="relative">
+                                    <select id="time" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+                                        <option value="">Select a time</option>
+                                        <option value="9:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Special Requests (Optional)</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Any special requests or notes for your appointment"></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ml-2">I agree to receive appointment reminders via email and SMS</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary text-white py-3 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-1">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Contact Us</h2>
+                    <p class="text-gray-700 mb-8">Have questions or need assistance? Reach out to us using any of the methods below.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mr-4">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Address</h4>
+                                <p class="text-gray-700">500 N Bell Ave #109, Denton, TX 76209, United States</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mr-4">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-phone-line"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                                <p class="text-gray-700">+1 940-612-9127</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mr-4">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-mail-line"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                <p class="text-gray-700">info@famabarber.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 !rounded-full flex items-center justify-center mr-4">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary">
+                                    <i class="ri-time-line"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Business Hours</h4>
+                                <div class="text-gray-700 space-y-1">
+                                    <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                                    <p>Saturday: 9:00 AM - 6:00 PM</p>
+                                    <p>Sunday: 10:00 AM - 4:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-900 mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-100 !rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition duration-300">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-facebook-fill"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 !rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition duration-300">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-instagram-line"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 !rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition duration-300">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-twitter-x-line"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 !rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition duration-300">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-yelp-line"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <div class="bg-white shadow-md !rounded-xl p-6 md:p-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="contact-name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                    <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                    <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your email">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="contact-subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <input type="text" id="contact-subject" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter message subject">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="contact-message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Type your message here"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="bg-primary text-white px-6 py-3 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-primary bg-opacity-5">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Subscribe to Our Newsletter</h2>
+                <p class="text-gray-700 mb-8">Stay updated with our latest offers, promotions, and styling tips. Subscribe to our newsletter.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                    <input type="email" class="flex-1 px-4 py-3 border border-gray-300 !rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your email address">
+                    <button type="submit" class="bg-primary text-white px-6 py-3 font-semibold !rounded-button hover:bg-opacity-90 transition duration-300 whitespace-nowrap">Subscribe</button>
+                </form>
+                
+                <p class="text-gray-500 text-sm mt-4">By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 block">Fama</a>
+                    <p class="text-gray-400 mb-6">Premium barber shop and beauty salon providing exceptional grooming services in Denton, TX.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 border border-gray-700 !rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition duration-300">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-facebook-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-700 !rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition duration-300">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-instagram-line"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-700 !rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition duration-300">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-twitter-x-line"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-700 !rounded-full flex items-center justify-center hover:bg-white hover:text-primary transition duration-300">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-yelp-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Gallery</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        <li><a href="#book" class="text-gray-400 hover:text-white transition">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Haircut</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Beard Trim</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Hair Styling</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Hair Coloring</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Facial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Hot Shave</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Business Hours</h4>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Monday - Friday</span>
+                            <span class="text-white">9:00 AM - 7:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Saturday</span>
+                            <span class="text-white">9:00 AM - 6:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Sunday</span>
+                            <span class="text-white">10:00 AM - 4:00 PM</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6">
+                        <h4 class="text-xl font-semibold mb-4">We Accept</h4>
+                        <div class="flex space-x-3">
+                            <div class="w-10 h-6 flex items-center justify-center text-white">
+                                <i class="ri-visa-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-white">
+                                <i class="ri-mastercard-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-white">
+                                <i class="ri-paypal-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-white">
+                                <i class="ri-apple-fill ri-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Fama Barber Shop and Beauty Salon. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-24 z-50 bg-primary text-white p-3 !rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 hidden">
+        <div class="w-6 h-6 flex items-center justify-center">
+            <i class="ri-arrow-up-line"></i>
+        </div>
+    </button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('hidden');
+                } else {
+                    backToTopButton.classList.add('hidden');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
